@@ -1,6 +1,6 @@
 // src/components/RatingBreakdown.js
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const RatingBreakdownWrapper = styled.div`
   text-align: center;
@@ -33,6 +33,15 @@ const Bar = styled.div`
   align-items: center;
 `;
 
+const BarAnimation = keyframes`
+  0% {
+    height: 0;
+  }
+  100% {
+    height: ${props => `${props.height}px`};
+  }
+`;
+
 const BarInner = styled.div`
   width: 30px;
   background-color: steelblue;
@@ -44,6 +53,8 @@ const BarInner = styled.div`
   position: absolute;
   bottom: -17px;
   height: ${props => `${props.height}px`};
+  transition: height 0.5s ease;
+  animation: ${BarAnimation} 0.5s ease;
 `;
 
 const Label = styled.span`
@@ -68,7 +79,7 @@ const YAxis = styled.div`
   border-right: 2px solid #000;
 `;
 
-const YAxisLabel = styled.div`
+const YAxisValue = styled.div`
   position: absolute;
   left: -30px;
   bottom: ${props => `${props.bottom}px`};
@@ -83,47 +94,65 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  margin-top: 33px;
   cursor: pointer;
   &:hover {
     background-color: #0056b3;
   }
 `;
 
+const XAxisLabel = styled.div`
+  margin-top: 40px;
+  color: #0056b3;
+`;
+
+const YAxisLabel = styled.div`
+  position: absolute;
+  left: -152px;
+  width: 150px;
+  bottom: 141px;
+  transform: rotate(270deg);
+  color: #0056b3;
+`;
+
 const RatingBreakdown = () => {
-    const initialRatings = [35, 50, 40, 22, 10];
-    const [ratings, setRatings] = useState(initialRatings);
+  const initialRatings = [35, 50, 40, 22, 10];
+  const yAxis = [0, 10, 20, 30, 40, 50];
+  const [ratings, setRatings] = useState(initialRatings);
 
-    const regenerateRatings = () => {
-        const newRatings = ratings.map(() => Math.floor(Math.random() * 51));
-        setRatings(newRatings);
-    };
+  const regenerateRatings = () => {
+    const newRatings = ratings.map(() => Math.floor(Math.random() * 51));
+    setRatings(newRatings);
+  };
 
-    return (
-        <RatingBreakdownWrapper>
-            <h2>Rating Breakdown</h2>
-            <ChartContainer>
-                <YAxis />
-                <XAxis>
-                    {ratings.map((_, index) => (
-                        <Label key={index}>{index + 1}</Label>
-                    ))}
-                </XAxis>
-                {[0, 10, 20, 30, 44, 50].map((value, index) => (
-                    <YAxisLabel key={index} bottom={value * 5}>{value}</YAxisLabel>
-                ))}
-                <Chart>
-                    {ratings.map((count, index) => (
-                        <Bar key={index}>
-                            <BarInner height={count * 5}>
-                                {count}
-                            </BarInner>
-                        </Bar>
-                    ))}
-                </Chart>
-            </ChartContainer>
-            <Button style={{marginTop:'33px'}}onClick={regenerateRatings}>Regenerate</Button>
-        </RatingBreakdownWrapper>
-    );
+  return (
+    <RatingBreakdownWrapper>
+      <h2>Rating Breakdown</h2>
+      <ChartContainer>
+        <YAxis />
+        <XAxis>
+          {ratings.map((_, index) => (
+            <Label key={index}>{index + 1}</Label>
+          ))}
+        </XAxis>
+        {yAxis.map((value, index) => (
+          <YAxisValue key={index} bottom={value * 5}>{value}</YAxisValue>
+        ))}
+        <YAxisLabel>No of Ratings</YAxisLabel>
+        <Chart>
+          {ratings.map((count, index) => (
+            <Bar key={index}>
+              <BarInner height={count * 5}>
+                {count}
+              </BarInner>
+            </Bar>
+          ))}
+        </Chart>
+      </ChartContainer>
+      <XAxisLabel>Rating</XAxisLabel>
+      <Button onClick={regenerateRatings}>Regenerate</Button>
+    </RatingBreakdownWrapper>
+  );
 };
 
 export default RatingBreakdown;
