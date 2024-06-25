@@ -65,7 +65,7 @@ const XAxis = styled.div`
   position: absolute;
   bottom: -33px;
   width: 100%;
-  border-top: 2px solid #000;
+  border-top: 2px solid #fff;
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
@@ -76,7 +76,7 @@ const YAxis = styled.div`
   left: 0;
   bottom: 0;
   height: 100%;
-  border-right: 2px solid #000;
+  border-right: 2px solid #fff;
 `;
 
 const YAxisValue = styled.div`
@@ -90,15 +90,12 @@ const YAxisValue = styled.div`
 const Button = styled.button`
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: darkgreen;
   color: white;
   border: none;
   border-radius: 5px;
   margin-top: 33px;
   cursor: pointer;
-  &:hover {
-    background-color: #0056b3;
-  }
 `;
 
 const XAxisLabel = styled.div`
