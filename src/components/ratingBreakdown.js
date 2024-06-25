@@ -108,7 +108,7 @@ const RatingBreakdown = () => {
                         <Label key={index}>{index + 1}</Label>
                     ))}
                 </XAxis>
-                {[0, 10, 20, 30, 40, 50].map((value, index) => (
+                {[0, 10, 20, 30, 44, 50].map((value, index) => (
                     <YAxisLabel key={index} bottom={value * 5}>{value}</YAxisLabel>
                 ))}
                 <Chart>
