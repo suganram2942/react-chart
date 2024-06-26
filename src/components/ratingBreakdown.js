@@ -1,4 +1,3 @@
-// src/components/RatingBreakdown.js
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -9,8 +8,8 @@ const RatingBreakdownWrapper = styled.div`
 
 const ChartContainer = styled.div`
   position: relative;
-  width: 400px; /* Adjust as needed */
-  height: 300px; /* Adjust as needed */
+  width: 400px;
+  height: 300px;
   margin: 20px auto;
   display: flex;
   flex-direction: column;
@@ -22,7 +21,7 @@ const Chart = styled.div`
   justify-content: space-around;
   align-items: flex-end;
   position: relative;
-  bottom: 20px; /* Space for X-axis labels */
+  bottom: 20px;
   width: 100%;
   height: 100%;
 `;
